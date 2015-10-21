@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-group" id="multiUploadKit">
+		<label class="formGroupLable">多附件上传：</label>
+        <div class="col-sm-9">
+            <div class="col-sm-6" style="padding: 0;">
+                <input type="file" class="form-control input-sm hidden" id="multiUpload" name="upload">
+                <input type="hidden" class="form-control input-sm" name="attachementPath" value="{{path}}" disabled>
+                <input type="text" class="form-control input-sm" placeholder="文件名" name="fileName">
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-primary btn-sm" data-purpose="browse">选择文件</a>
+            </div>
+            <div class="col-sm-8" style="padding: 0;">
+                <small id="uploadHelp" class="help-block upload-help hide col-sm-10" style="color: #a94442;padding:0;"></small>
+                <div data-purpose="multiContainer" style="display: none;" class="col-sm-12 file-container"></div>
+            </div>
+        </div>
+	</div>
+    <script src="./jquery-pku-upload.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    $('#multiUploadKit').pkuUpload({
+        multi: true,
+        subfix: ['jpg', 'jpeg', 'png', 'rar', 'zip', 'pdf', 'doc', 'docx', 'xls', 'xlsx'],
+        helpTarget: 'attach-err-msg', //需要id
+        attachmentName: 'path',
+        url: '../common/kindeditor!jQueryFileUpload.action',
+        removeUrl: '../common/kindeditor!jQueryRemove.action',
+        dir: 'bigfair-confirmletter',
+        localAttachPath: 'attachementPath',
+        fileElementId: 'multiUpload',
+        data: [{
+            name: 'aaaaa',
+            url: 'bbbb'
+        }],
+        onAfterUpload: function() {
+            console.log(this.getFileNames());
+        }
+    });
+    </script>
+</body>
+</html>
